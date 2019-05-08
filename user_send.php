@@ -1,40 +1,40 @@
-
-
-
-<?php 
+<?php
 session_start();
 
-	require_once("includes/dbconnect.php");
+require_once("includes/dbconnect.php");
 
 
 $id = $_SESSION['id'];
 
-$surname=htmlspecialchars($_POST['surname']);
-$firstname=htmlspecialchars($_POST['firstname']);
-$middlename= htmlspecialchars($_POST['middlename']);
-$email=htmlspecialchars($_POST['email']);
-	
-	
-	$update = $mysqli->query("UPDATE `user1` SET `surname` = '".$surname."', `firstname` = '".$firstname."', `middlename` = '".$middlename."', `email` = '".$email."' WHERE `id` = '$id' ");
+$surname = htmlspecialchars($_POST['surname']);
+$firstname = htmlspecialchars($_POST['firstname']);
+$middlename = htmlspecialchars($_POST['middlename']);
+$email = htmlspecialchars($_POST['email']);
+
+/**
+ * Нельзя так делать, у тебя здесь sql инъекция
+ * @see https://www.php.net/manual/ru/mysqli.quickstart.prepared-statements.php
+ */
+$update = $mysqli->query("UPDATE `user1` SET `surname` = '" . $surname . "', `firstname` = '" . $firstname . "', `middlename` = '" . $middlename . "', `email` = '" . $email . "' WHERE `id` = '$id' ");
 
 
-if(isset($_POST["send"])) {
+if (isset($_POST["send"])) {
     $_SESSION["send"] = 'Данные изменены!';
-   exit('<meta http-equiv="refresh" content="0; url=index.php" />');
+    exit('<meta http-equiv="refresh" content="0; url=index.php" />');
 }
-if(!$update){
+if (!$update) {
 
-				$messages = "<p class='message_error'><strong>Ошибка!</strong> При отправке данных произошла ошибка. </p><p>Описание ошибки: $mysqli->error <br /> Код ошибки: $mysqli->errno </p>";
-				echo ($messages);
+    $messages = "<p class='message_error'><strong>Ошибка!</strong> При отправке данных произошла ошибка. </p><p>Описание ошибки: $mysqli->error <br /> Код ошибки: $mysqli->errno </p>";
+    echo($messages);
 
-			}else{
+} else {
 
-				$messages = "<p class='success_message'>Данные успешно изменены! <br /> </p>";
-				echo ($messages);
-			}
+    $messages = "<p class='success_message'>Данные успешно изменены! <br /> </p>";
+    echo($messages);
+}
 
-			$mysqli->close();
+$mysqli->close();
 
 
-	?>
+?>
 	

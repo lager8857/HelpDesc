@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 require_once("includes/dbconnect.php");
@@ -15,20 +15,21 @@ require_once("includes/dbconnect.php");
 
 <span style="color:brown;">'.$row['9'].'</span>
 </div>*/
-	
-	$query = "SELECT chat_mess.id_user,chat_mess.mess,chat.id_ticket,ticket.id,ticket.message,user1.firstname FROM chat_mess,chat,ticket,user1 WHERE (user1.id=chat_mess.id_user) AND (chat.id_ticket=ticket.id)";
-if ($tabl = $mysqli->query($query));		
-while ($row = $tabl->fetch_row()){
-echo '	
+
+$query = "SELECT chat_mess.id_user,chat_mess.mess,chat.id_ticket,ticket.id,ticket.message,user1.firstname FROM chat_mess,chat,ticket,user1 WHERE (user1.id=chat_mess.id_user) AND (chat.id_ticket=ticket.id)";
+if ($tabl = $mysqli->query($query)) ;
+while ($row = $tabl->fetch_row()) {
+    echo '	
 <body>
 <div id="chat"></div>
 <div id="chat_data">
-<span style="color:green;">'.$row['5'].' </span>:
+<span style="color:green;">' . $row['5'] . ' </span>:
 	
-<span style="color:brown;">'.$row['1'].'</span>
+<span style="color:brown;">' . $row['1'] . '</span>
 
 </div>
 
 	
-';}?>
+';
+} ?>
 </body>
