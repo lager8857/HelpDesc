@@ -1,11 +1,14 @@
 <?php
 
-	session_start();
+session_start();
+/**
+ * Зачем? после session_destroy они сами удалятся
+ */
+unset($_SESSION['email']);
+unset($_SESSION['password']);
+session_destroy();
 
-	unset($_SESSION['email']);
-	unset($_SESSION['password']);
+header("HTTP/1.1 301 Moved Permanently");
+header("Location: " . $_SERVER["HTTP_REFERER"]);
 
-	header("HTTP/1.1 301 Moved Permanently");
-	header("Location: ".$_SERVER["HTTP_REFERER"]);
-    session_destroy();
 ?>
